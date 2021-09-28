@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <h1>E2E Transactions Analysis</h1>
+
+    <div class="first_run">
+        <p>Upload raw Excel files downloaded from Microsoft Forms </p>
+        <br>
+        <form method=post enctype=multipart/form-data>
+            Wasabi File
+            <input type=file name=wasabi accept=".xls,.xlsx">
+            Iceland/Harvey Nichols File
+            <input type=file name=hn_iceland accept=".xls,.xlsx">
+            <input type=submit name=1strun value=Upload>
+        </form>
+    </div>
+    <br>
+    <div class="second_run">
+        <p>Upload Excel file with modifications for 2nd run</p>
+        <br>
+        <form method=post enctype=multipart/form-data>
+            2nd Run
+            <input type=file name=2nd_File accept=".xls,.xlsx">
+            <input type=submit name=2ndrun value=Upload>
+        </form>
+    </div>
+</body>
+</html>

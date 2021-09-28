@@ -6,8 +6,12 @@ name = "pypi"
 [packages]
 flask = "*"
 pandas = "*"
+openpyxl = "*"
+psycopg2-binary = "*"
+python-dotenv = "*"
 
 [dev-packages]
+ipykernel = "*"
 
 [requires]
 python_version = "3.9"
