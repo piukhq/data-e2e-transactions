@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-    <h1>E2E Transactions Analysis</h1>
 
+    <h1>E2E Transactions Analysis</h1>
+    <br>
     <div class="first_run">
         <p>Upload raw Excel files downloaded from Microsoft Forms </p>
         <br>
@@ -21,9 +22,20 @@
             <input type=submit name=1strun value=Upload>
         </form>
     </div>
+    <div class='error'>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <br>
+    <br>
     <br>
     <div class="second_run">
-        <p>Upload Excel file with modifications for 2nd run</p>
+        <p>Upload modified Excel output from initial output</p>
         <br>
         <form method=post enctype=multipart/form-data>
             2nd Run

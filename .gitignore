@@ -178,5 +178,6 @@ Temporary Items
 # envfile
 env.py
 
-# Wasabi MIDs
-Wasabi MIDs.csv
+# files
+*.csv
+*.xlsx

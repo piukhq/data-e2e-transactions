@@ -1,17 +1,31 @@
-from flask import Flask, request, render_template, url_for, send_from_directory
+from flask import Flask, flash, request, render_template, url_for, send_from_directory
 import pandas as pd
 from datetime import datetime
 import time, functions
 from werkzeug.utils import redirect
 
 app = Flask(__name__)
+app.secret_key = '_hBofY7MK.c.73!-Qirx'
 app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
 
 
 @app.route("/", methods=['GET','POST'])
 def home():
+    message = ""
     if request.method == 'POST':
         if '1strun' in request.form:
+            if request.files['wasabi'].filename == '' or request.files['hn_iceland'].filename == '':
+                message = 'File(s) missing'
+                flash(message,category='error')
+                return render_template('upload.html')
+            if 'Wasabi' not in request.files['wasabi'].filename:
+                message = 'Wasabi file should contain \"Wasabi\" in the file name, please make sure you have selected the correct file'
+                flash(message,category='error')
+                return render_template('upload.html')
+            if 'Iceland and HN' not in request.files['hn_iceland'].filename:
+                message = 'Iceland/Harvey Nichols file should contain \"Iceland and HN\" in the file name, please make sure you have selected the correct file'
+                flash(message,category='error')
+                return render_template('upload.html')
             tic = time.perf_counter()
 
             df = pd.read_excel(request.files.get('wasabi'),engine='openpyxl') # Get Wasabi raw file
@@ -36,7 +50,6 @@ def home():
             toc = time.perf_counter()
             return redirect(url_for('download', timetaken=round(toc-tic)))
         elif '2ndrun' in request.form:
-
             tic = time.perf_counter()
 
             iceland = pd.read_excel(request.files.get('2nd_File'),engine='openpyxl',sheet_name='Iceland',usecols='A:K',dtype={'MID':str,'Auth code':str,'Transaction ID':str})
