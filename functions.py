@@ -181,7 +181,7 @@ def iceland(df):
     
     df['Matched'] = pd.notna(df['transaction_id'])
     df = df.drop(['transaction_id','payment_scheme','transaction_date','spend_amount','mid'],axis=1)
-    
+    df['Payment amount'] = df['Payment amount'] / 100
     df = df[['ID','Merchant','Card Type','Payment Method','MID','Date','Time','Payment amount','Auth code',
         'Transaction ID','Tester ID','Matched']]
     return df

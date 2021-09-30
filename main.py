@@ -67,6 +67,12 @@ def home():
             wasabi = functions.tlog(wasabi,'wasabi-club')
             iceland = functions.iceland(iceland)
 
+            file_path = 'Output Files/download.xlsx'
+            with pd.ExcelWriter(file_path, engine='openpyxl') as writer:
+                iceland.to_excel(writer, sheet_name='Iceland', index=False)
+                hn.to_excel(writer, sheet_name='HN', index=False)
+                wasabi.to_excel(writer, sheet_name='Wasabi', index=False)
+
             toc = time.perf_counter()
 
             return redirect(url_for('download', timetaken=round(toc-tic)))

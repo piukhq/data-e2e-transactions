@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Page</title>
+    <title>Download</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-    <h1 class="cover-heading">Download Output</h1>
+    <h1 class="cover-heading">Download Page - time taken to process file: {{message}}s</h1>
     <br>
     <div>
         <p>
-            {Description}
+            File has been created, click the link below to download the file. It will automatically name the file with today's date in your downloads e.g "E2E Transactions 29th Sep.xlsx"
         </p>
     </div>
     <br>
@@ -22,10 +22,6 @@
         <form method=post>
             <input type="submit" value="Download File" class="download">
         </form>
-    </div>
-    <br>
-    <div>
-        <p>{{message}}s for file creation</p>
     </div>
 </body>
 </html>

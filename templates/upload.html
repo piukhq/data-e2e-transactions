@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload</title>
+    <title>Home</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
@@ -18,7 +18,8 @@
             This tool allows you to upload transaction data from testers to check if the transactions have been received from both the payment schemes and merchants and confirm they have been matched.  Currently 
             supported merchants are Iceland, Harvey Nichols & Wasabi. Harvey Nichols and Wasabi both include full transaction IDs in their receipts therefore the checks are made to Atlas (for responses), the 
             matched transaction table and the scheme transaction table however Iceland do not provide full transaction ID so the checks are only made on matched transaction table. This is for performance  reasons 
-            due to the logic required to find the transactions in their respective tables.
+            due to the logic required to find the transactions in their respective tables. Additionally the application only checks transactions submitted in the previous week to the file being submitted again to
+            aid performance.
         </p>
         <p>
             Then first 2 file selectors below are for the inital files that can be downloaded from the Microsoft forms page on Sharepoint, these should not be modified in anyway and uploaded into the appropriate 
