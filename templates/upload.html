@@ -5,23 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
 
-    <h1>E2E Transactions Analysis</h1>
+    <h1 class="cover-heading">E2E Transactions Harmonia Lookup</h1>
     <br>
-    <div class="first_run">
-        <p>Upload raw Excel files downloaded from Microsoft Forms </p>
-        <br>
-        <form method=post enctype=multipart/form-data>
-            Wasabi File
-            <input type=file name=wasabi accept=".xls,.xlsx">
-            Iceland/Harvey Nichols File
-            <input type=file name=hn_iceland accept=".xls,.xlsx">
-            <input type=submit name=1strun value=Upload>
-        </form>
+    <div class="description">
+        <p>
+            This tool allows you to upload transaction data from testers to check if the transactions have been received from both the payment schemes and merchants and confirm they have been matched.  Currently 
+            supported merchants are Iceland, Harvey Nichols & Wasabi. Harvey Nichols and Wasabi both include full transaction IDs in their receipts therefore the checks are made to Atlas (for responses), the 
+            matched transaction table and the scheme transaction table however Iceland do not provide full transaction ID so the checks are only made on matched transaction table. This is for performance  reasons 
+            due to the logic required to find the transactions in their respective tables.
+        </p>
+        <p>
+            Then first 2 file selectors below are for the inital files that can be downloaded from the Microsoft forms page on Sharepoint, these should not be modified in anyway and uploaded into the appropriate 
+            file sections. Click on Upload and it will run the database queries and redirect you to the download page to download the output file, this can take from 10s to over a minute depending on the number 
+            of transactions that need to be checked and the size of Harmonia at the time so please wait for the page to load. If the output flags transactions as not matched and you have found errors in the data
+            submitted by the testers then make the modifications in that file, save it and upload it to the "Modified File" section. This will do another run with your modifications, if transactions still aren't
+            matched then they should be passed onto the MLT process.
+        </p>
     </div>
+    <br>
     <div class='error'>
         {% with messages = get_flashed_messages() %}
             {% if messages %}
@@ -31,16 +38,26 @@
             {% endif %}
         {% endwith %}
     </div>
-    <br>
+    <div class="first_run">
+        <p class="lead">Upload raw Excel files downloaded from Microsoft Forms </p>
+        <br>
+        <form method=post enctype=multipart/form-data>
+            <label for="file">Select Iceland/Harvey Nichols File</label>
+            <input type=file name=hn_iceland accept=".xls,.xlsx">
+            <label for="file">Select Wasabi File</label>
+            <input type=file name=wasabi accept=".xls,.xlsx">
+            <input type=submit name=1strun value=Upload class="btn btn-outline-light">
+        </form>
+    </div>
     <br>
     <br>
     <div class="second_run">
-        <p>Upload modified Excel output from initial output</p>
+        <p class="lead">Upload modified Excel output from initial output</p>
         <br>
         <form method=post enctype=multipart/form-data>
-            2nd Run
+            <label for="file">Select Modified File</label>
             <input type=file name=2nd_File accept=".xls,.xlsx">
-            <input type=submit name=2ndrun value=Upload>
+            <input type=submit name=2ndrun value=Upload class="btn btn-outline-light">
         </form>
     </div>
 </body>

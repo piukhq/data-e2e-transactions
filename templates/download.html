@@ -5,13 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Download Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-    <h3>Download Page</h3>
-    <form method=post>
-        <input type="submit" value="Download File">
-    </form>
-    <h5>{{message}}s for file creation</h5>
+    <h1 class="cover-heading">Download Output</h1>
+    <br>
+    <div>
+        <p>
+            {Description}
+        </p>
+    </div>
+    <br>
+    <div>
+        <form method=post>
+            <input type="submit" value="Download File" class="download">
+        </form>
+    </div>
+    <br>
+    <div>
+        <p>{{message}}s for file creation</p>
+    </div>
 </body>
 </html>

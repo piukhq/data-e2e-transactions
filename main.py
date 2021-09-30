@@ -8,7 +8,6 @@ app = Flask(__name__)
 app.secret_key = '_hBofY7MK.c.73!-Qirx'
 app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
 
-
 @app.route("/", methods=['GET','POST'])
 def home():
     message = ""
@@ -50,6 +49,10 @@ def home():
             toc = time.perf_counter()
             return redirect(url_for('download', timetaken=round(toc-tic)))
         elif '2ndrun' in request.form:
+            if request.files['2nd_File'].filename == '':
+                message = 'File(s) missing'
+                flash(message,category='error')
+                return render_template('upload.html')
             tic = time.perf_counter()
 
             iceland = pd.read_excel(request.files.get('2nd_File'),engine='openpyxl',sheet_name='Iceland',usecols='A:K',dtype={'MID':str,'Auth code':str,'Transaction ID':str})
@@ -73,7 +76,7 @@ def home():
 @app.route("/download/<timetaken>", methods=['GET','POST'])
 def download(timetaken):
     if request.method == "POST":
-        date = functions.ord(int(datetime.today().strftime("%d"))) + ' '+ datetime.today().strftime("%b")
+        date = functions.ord(int(datetime.today().strftime("%d"))) + ' ' + datetime.today().strftime("%b")
         file_path = f'E2E Transactions {date}' + '.xlsx'
         return send_from_directory('Output Files/', 'download.xlsx', attachment_filename=file_path, as_attachment=True)
     return render_template('download.html', message=timetaken)

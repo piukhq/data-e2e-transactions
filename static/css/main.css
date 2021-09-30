@@ -2,18 +2,64 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: rgb(199, 199, 199);
+    color: rgb(215, 215, 215);
     background-image: linear-gradient(90deg, rgb(84, 126, 128),rgb(151, 69, 69))
   }
 
 h1 {
     text-align: center;
+    padding-top: 0.3em;
 }
 
 div {
     text-align: center;
 }
 
+p {
+    text-align: justify;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-size: small;
+}
+
+.lead {
+    text-align: center;
+}
+
 .error {
     color: tomato;
 }
+
+input[type=file]::file-selector-button {
+    background-color: rgb(84, 126, 128, 0);
+    border: 1px solid rgba(255, 255, 255);
+    color: rgb(255, 255, 255);
+    padding: .2em .4em;
+    border-radius: .2em;
+    transition: 0.3s;
+  }
+
+input [type=file] {
+    border: 1px white;
+}
+
+  input[type=file]::file-selector-button:hover {
+    background-color: #1fe0;
+    border: 1px solid #000000;
+    color: rgb(0, 0, 0);
+  }
+
+input[type=submit].download {
+    background-color: rgb(84, 126, 128, 0);
+    border: 1px solid rgba(255, 255, 255);
+    color: rgb(255, 255, 255);
+    padding: .2em .4em;
+    border-radius: .2em;
+    transition: 0.3s;
+}
+
+input[type=submit].download:hover  {
+    background-color: rgba(255, 255, 255);
+    border: 1px solid #ffffff;
+    color: rgb(0, 0, 0);
+  }
