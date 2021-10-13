@@ -8,9 +8,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 <body>
-
     <h1 class="cover-heading">E2E Transactions Harmonia Lookup</h1>
     <br>
     <div class="description">
@@ -23,10 +23,10 @@
         </p>
         <p>
             Then first 2 file selectors below are for the inital files that can be downloaded from the Microsoft forms page on Sharepoint, these should not be modified in anyway and uploaded into the appropriate 
-            file sections. Click on Upload and it will run the database queries and redirect you to the download page to download the output file, this can take from 10s to over a minute depending on the number 
-            of transactions that need to be checked and the size of Harmonia at the time so please wait for the page to load. If the output flags transactions as not matched and you have found errors in the data
-            submitted by the testers then make the modifications in that file, save it and upload it to the "Modified File" section. This will do another run with your modifications, if transactions still aren't
-            matched then they should be passed onto the MLT process.
+            file sections. Click on Upload and it will run the database queries and redirect you to the download page to download the output file. <em>This can take from 10s to over a minute depending on the number 
+            of transactions that need to be checked and the size of Harmonia at the time so please wait for the page to load and do not click on anything.</em> If the output flags transactions as not matched and you 
+            have found errors in the data submitted by the testers then make the modifications in that file, save it and upload it to the "Modified File" section. This will do another run with your modifications, 
+            if transactions still aren't matched then they should be passed onto the MLT process.
         </p>
     </div>
     <br>

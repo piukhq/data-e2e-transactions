@@ -1,11 +1,13 @@
 from flask import Flask, flash, request, render_template, url_for, send_from_directory
 import pandas as pd
 from datetime import datetime
-import time, functions
+import time, functions, os
 from werkzeug.utils import redirect
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = '_hBofY7MK.c.73!-Qirx'
+app.secret_key = os.getenv("FLASK_KEY")
 app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
 
 @app.route("/", methods=['GET','POST'])
@@ -88,4 +90,4 @@ def download(timetaken):
     return render_template('download.html', message=timetaken)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

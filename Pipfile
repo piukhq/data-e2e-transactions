@@ -5,10 +5,10 @@ name = "pypi"
 
 [packages]
 flask = "*"
-pandas = "*"
 openpyxl = "*"
 psycopg2-binary = "*"
 python-dotenv = "*"
+pandas = "*"
 
 [dev-packages]
 ipykernel = "*"
