@@ -7,11 +7,19 @@ name = "pypi"
 flask = "*"
 openpyxl = "*"
 psycopg2-binary = "*"
-python-dotenv = "*"
 pandas = "*"
+gunicorn = "*"
 
 [dev-packages]
 ipykernel = "*"
+black = "==21.9b0"
+flake8 = "*"
+mypy = "*"
+pytest = "*"
+ptpython = "*"
+xenon = "*"
+regex = "<2021.10.8"
+isort = "*"
 
 [requires]
 python_version = "3.9"
