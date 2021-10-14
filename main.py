@@ -61,7 +61,7 @@ def home():
             wasabi = functions.tlog(wasabi, "wasabi-club")
             iceland = functions.iceland(iceland)
 
-            file_path = "Output Files/download.xlsx"
+            file_path = "/tmp/download.xlsx"
             with pd.ExcelWriter(file_path, engine="openpyxl") as writer:
                 iceland.to_excel(writer, sheet_name="Iceland", index=False)
                 hn.to_excel(writer, sheet_name="HN", index=False)
@@ -106,7 +106,7 @@ def home():
             wasabi = functions.tlog(wasabi, "wasabi-club")
             iceland = functions.iceland(iceland)
 
-            file_path = "Output Files/download.xlsx"
+            file_path = "/tmp/download.xlsx"
             with pd.ExcelWriter(file_path, engine="openpyxl") as writer:
                 iceland.to_excel(writer, sheet_name="Iceland", index=False)
                 hn.to_excel(writer, sheet_name="HN", index=False)
@@ -124,7 +124,7 @@ def download(timetaken):
     if request.method == "POST":
         date = functions.ord(int(datetime.today().strftime("%d"))) + " " + datetime.today().strftime("%b")
         file_path = f"E2E Transactions {date}" + ".xlsx"
-        return send_from_directory("Output Files/", "download.xlsx", attachment_filename=file_path, as_attachment=True)
+        return send_from_directory("/tmp", "download.xlsx", attachment_filename=file_path, as_attachment=True)
     return render_template("download.html", message=timetaken)
 
 
