@@ -119,10 +119,14 @@ def wasabi(df):
             "Select your ID",
             "Card Type",
             "Payment Method",
-            "Receipt number - AS PRINTED ON RECEIPT\nPlease consult the annotated receipts you were provided \
-                with separately to locate the receipt number.",
-            "Store *\nPlease input the store address as found on the receipt. Consult the annotated receipts \
-                you were provided with separately to locate the transaction ID.",
+            (
+                "Receipt number - AS PRINTED ON RECEIPT\nPlease consult the annotated receipts you were provided "
+                "with separately to locate the receipt number."
+            ),
+            (
+                "Store *\nPlease input the store address as found on the receipt. Consult the annotated receipts "
+                "you were provided with separately to locate the transaction ID."
+            ),
             "Payment amount - AS PRINTED ON RECEIPT\nEnter only the number, including decimals (no £ sign).",
             "Date - AS PRINTED ON RECEIPT",
             "Time - AS PRINTED ON RECEIPT",

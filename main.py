@@ -22,13 +22,17 @@ def home():
                 flash(message, category="error")
                 return render_template("upload.html")
             if "Wasabi" not in request.files["wasabi"].filename:
-                message = 'Wasabi file should contain "Wasabi" in the file name, \
-                    please make sure you have selected the correct file'
+                message = (
+                    'Wasabi file should contain "Wasabi" in the file name, '
+                    "please make sure you have selected the correct file"
+                )
                 flash(message, category="error")
                 return render_template("upload.html")
             if "Iceland and HN" not in request.files["hn_iceland"].filename:
-                message = 'Iceland/Harvey Nichols file should contain "Iceland and HN" in the file name, \
-                    please make sure you have selected the correct file'
+                message = (
+                    'Iceland/Harvey Nichols file should contain "Iceland and HN" in the file name, '
+                    "please make sure you have selected the correct file"
+                )
                 flash(message, category="error")
                 return render_template("upload.html")
             tic = time.perf_counter()
@@ -39,9 +43,11 @@ def home():
                 request.files.get("hn_iceland"),
                 engine="openpyxl",
                 dtype={
-                    "MID (Merchant ID) - AS PRINTED ON RECEIPT\nOnly enter the numbers - no other characters. \
-                        The receipt may not contain the full MID (first characters may be obscured). \
-                        This is normal - please type in...": str,
+                    (
+                        "MID (Merchant ID) - AS PRINTED ON RECEIPT\nOnly enter the numbers - no other characters. "
+                        "The receipt may not contain the full MID (first characters may be obscured). "
+                        "This is normal - please type in..."
+                    ): str,
                     "Auth code - AS PRINTED ON RECEIPT": str,
                 },
             )  # Get HN/Iceland file
