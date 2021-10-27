@@ -3,16 +3,28 @@ from datetime import datetime
 
 import pandas as pd
 from flask import Flask, flash, render_template, request, send_from_directory, url_for
+from flask_httpauth import HTTPBasicAuth
+from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import redirect
 
 import functions
 
 app = Flask(__name__)
+auth = HTTPBasicAuth()
 app.secret_key = "9a5MbU-dYtC2OTZ4df5MfnBwijkty9dX"  # not actually a secret, safe to ship with app
 app.config["MAX_CONTENT_LENGTH"] = 1024 * 1024
 
+users = {"data-management": generate_password_hash("leave-slab-sausage")}  # Will add Azure AD auth in future
+
+
+@auth.verify_password
+def verify_password(username, password):
+    if username in users and check_password_hash(users.get(username), password):
+        return username
+
 
 @app.route("/", methods=["GET", "POST"])
+@auth.login_required
 def home():
     message = ""
     if request.method == "POST":

@@ -9,6 +9,7 @@ openpyxl = "*"
 psycopg2-binary = "*"
 pandas = "*"
 gunicorn = "*"
+flask-httpauth = "*"
 
 [dev-packages]
 ipykernel = "*"
