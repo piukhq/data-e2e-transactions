@@ -1,9 +1,11 @@
 import time
 from datetime import datetime
+from os import getenv
 
 import pandas as pd
 from flask import Flask, flash, render_template, request, send_from_directory, url_for
 from flask_httpauth import HTTPBasicAuth
+from werkzeug.middleware.proxy_fix import ProxyFix
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import redirect
 
@@ -15,6 +17,12 @@ app.secret_key = "9a5MbU-dYtC2OTZ4df5MfnBwijkty9dX"  # not actually a secret, sa
 app.config["MAX_CONTENT_LENGTH"] = 1024 * 1024
 
 users = {"data-management": generate_password_hash("leave-slab-sausage")}  # Will add Azure AD auth in future
+
+app.wsgi_app = ProxyFix(
+    app.wsgi_app,
+    x_proto=int(getenv("use_x_forwarded_proto", default=False)),
+    x_host=int(getenv("use_x_forwarded_host", default=False)),
+)
 
 
 @auth.verify_password
