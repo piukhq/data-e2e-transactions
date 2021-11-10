@@ -77,8 +77,8 @@ def home():
             wasabi = functions.atlas(wasabi, "wasabi-club")
             hn = functions.matched(hn)
             wasabi = functions.matched(wasabi)
-            hn = functions.tlog(hn, "harvey-nichols")
-            wasabi = functions.tlog(wasabi, "wasabi-club")
+            # hn = functions.tlog(hn, "harvey-nichols")
+            # wasabi = functions.tlog(wasabi, "wasabi-club")
             iceland = functions.iceland(iceland)
 
             file_path = "/tmp/download.xlsx"
