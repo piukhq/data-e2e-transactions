@@ -11,6 +11,7 @@ pandas = "*"
 gunicorn = "*"
 flask-httpauth = "*"
 numpy = "*"
+azure-storage-blob = "*"
 
 [dev-packages]
 ipykernel = "*"

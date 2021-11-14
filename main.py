@@ -1,9 +1,9 @@
-import time
 from datetime import datetime
 from os import getenv
 
 import pandas as pd
-from flask import Flask, flash, render_template, request, send_from_directory, url_for
+from azure.storage.blob import BlobServiceClient
+from flask import Flask, flash, render_template, request
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.middleware.proxy_fix import ProxyFix
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -23,6 +23,18 @@ app.wsgi_app = ProxyFix(
     x_proto=int(getenv("use_x_forwarded_proto", default=False)),
     x_host=int(getenv("use_x_forwarded_host", default=False)),
 )
+
+blob_storage_connection_string = getenv("blob_storage_connection_string")
+blob_storage_container = getenv("blob_storage_container", "data-management")
+
+
+def upload_blob(filename: str) -> str:
+    client = BlobServiceClient.from_connection_string(blob_storage_connection_string)
+    blobname = f"e2e-transactions-{datetime.utcnow().strftime('%FT%H%M%SZ')}.xlsx"
+    blob = client.get_blob_client(container=blob_storage_container, blob=blobname)
+    with open(filename, "rb") as f:
+        blob.upload_blob(f)
+    return blob.url
 
 
 @auth.verify_password
@@ -55,7 +67,6 @@ def home():
                 )
                 flash(message, category="error")
                 return render_template("upload.html")
-            tic = time.perf_counter()
 
             df = pd.read_excel(request.files.get("wasabi"), engine="openpyxl")  # Get Wasabi raw file
             wasabi = functions.wasabi(df)  # Format Wasabi file and do DB checks
@@ -87,14 +98,13 @@ def home():
                 hn.to_excel(writer, sheet_name="HN", index=False)
                 wasabi.to_excel(writer, sheet_name="Wasabi", index=False)
 
-            toc = time.perf_counter()
-            return redirect(url_for("download", timetaken=round(toc - tic)))
+            blob_url = upload_blob("/tmp/download.xlsx")
+            return redirect(location=blob_url)
         elif "2ndrun" in request.form:
             if request.files["2nd_File"].filename == "":
                 message = "File(s) missing"
                 flash(message, category="error")
                 return render_template("upload.html")
-            tic = time.perf_counter()
 
             iceland = pd.read_excel(
                 request.files.get("2nd_File"),
@@ -132,20 +142,10 @@ def home():
                 hn.to_excel(writer, sheet_name="HN", index=False)
                 wasabi.to_excel(writer, sheet_name="Wasabi", index=False)
 
-            toc = time.perf_counter()
-
-            return redirect(url_for("download", timetaken=round(toc - tic)))
+            blob_url = upload_blob("/tmp/download.xlsx")
+            return redirect(location=blob_url)
 
     return render_template("upload.html")
-
-
-@app.route("/download/<timetaken>", methods=["GET", "POST"])
-def download(timetaken):
-    if request.method == "POST":
-        date = functions.ord(int(datetime.today().strftime("%d"))) + " " + datetime.today().strftime("%b")
-        file_path = f"E2E Transactions {date}" + ".xlsx"
-        return send_from_directory("/tmp", "download.xlsx", attachment_filename=file_path, as_attachment=True)
-    return render_template("download.html", message=timetaken)
 
 
 if __name__ == "__main__":
